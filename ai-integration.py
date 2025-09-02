@@ -2,6 +2,9 @@ import os
 from pinecone import Pinecone
 from openai import OpenAI
 from dotenv import load_dotenv
+from langchain.memory import ConversationBufferMemory
+from langchain.chains import ConversationChain
+from langchain_openai import ChatOpenAI
 
 # Load environment variables
 load_dotenv()
@@ -9,6 +12,11 @@ load_dotenv()
 # Initialize clients
 pc = Pinecone(api_key=os.getenv("PINECONE_API_KEY"))
 openai_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
+# Initialize LangChain
+llm = ChatOpenAI(model="gpt-4", api_key=os.getenv("OPENAI_API_KEY"))
+memory = ConversationBufferMemory()
+chain = ConversationChain(llm=llm, memory=memory)
 
 # Connect to index
 index = pc.Index("aayush-portfolio")
@@ -40,8 +48,8 @@ def search_portfolio(query, top_k=20, rerank_top_n=5):
     
     return results
 
-def generate_response(query, search_results):
-    """Generate AI response based on search results"""
+def generate_response_with_memory(query, search_results):
+    """Generate AI response with conversational memory"""
     # Load prompt from file
     with open("prompt.txt", "r") as f:
         system_prompt = f.read()
@@ -51,17 +59,13 @@ def generate_response(query, search_results):
     for match in search_results.matches:
         context += f"{match.metadata['chunk_text']}\n"
     
-    # Generate response using OpenAI
-    response = openai_client.chat.completions.create(
-        model="gpt-4",
-        messages=[
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": f"Question: {query}\n\nContext: {context}\n\nAnswer:"}
-        ],
-        max_tokens=300
-    )
+    # Create enhanced prompt with context
+    enhanced_input = f"{system_prompt}\n\nContext from database: {context}\n\nUser question: {query}"
     
-    return response.choices[0].message.content
+    # Use LangChain with memory
+    response = chain.predict(input=enhanced_input)
+    
+    return response
 
 def main():
     print("AI Portfolio Assistant - Ask me anything about Aayush Sapkota!")
@@ -81,8 +85,8 @@ def main():
             # Search portfolio
             search_results = search_portfolio(query)
             
-            # Generate response
-            response = generate_response(query, search_results)
+            # Generate response with memory
+            response = generate_response_with_memory(query, search_results)
             
             print(f"AI: {response}\n")
             
