@@ -42,7 +42,7 @@ records = [
     { "_id": "opensource_1", "chunk_text": "Numaflow - Docker file optimization contribution. Reduced Docker image size and improved speed significantly.", "category": "opensource" },
     
     # Events and Community
-    { "_id": "events_1", "chunk_text": "The AI Collective - Kingston Chapter Launch. Co-founder; hosted chapter event for AI discussions.", "category": "events" },
+    { "_id": "events_1", "chunk_text": "The AI Collective - Kingston Chapter Launch. Member; hosted chapter event for AI discussions.", "category": "events" },
     { "_id": "events_2", "chunk_text": "Build With AI Workshop - GDG Mississauga/IDEA Mississauga. Hands-on workshop on GenAI applications, RAG, LangChain, BigQuery, Vertex AI, vector embeddings.", "category": "events" },
     { "_id": "events_3", "chunk_text": "Intuit Open Source Event - Toronto Tech Week. Learned about Numaflow, event-driven architecture, open-source workflows.", "category": "events" },
     { "_id": "events_4", "chunk_text": "Dayforce Virtual Open House - Gained insights from professionals on career preparation.", "category": "events" },
