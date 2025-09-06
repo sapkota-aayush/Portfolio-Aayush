@@ -1,57 +1,27 @@
-import React, {useState, useEffect} from "react";
-import {
-  Main,
-  Timeline,
-  Expertise,
-  Project,
-  Contact,
-  Navigation,
-  Footer,
-  ChatBot,
-  HeroAI,
-} from "./components";
-import FadeIn from './components/FadeIn';
-import './index.scss';
+import { Toaster } from "@/components/ui/toaster";
+import { Toaster as Sonner } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Index from "./pages/Index";
+import NotFound from "./pages/NotFound";
 
-function App() {
-    const [mode, setMode] = useState<string>('dark');
-    const [isChatOpen, setIsChatOpen] = useState<boolean>(false);
+const queryClient = new QueryClient();
 
-    const handleModeChange = () => {
-        if (mode === 'dark') {
-            setMode('light');
-        } else {
-            setMode('dark');
-        }
-    }
-
-    const handleChatOpen = () => {
-        setIsChatOpen(true);
-    }
-
-    const handleChatClose = () => {
-        setIsChatOpen(false);
-    }
-
-    useEffect(() => {
-        window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
-      }, []);
-
-    return (
-    <div className={`main-container ${mode === 'dark' ? 'dark-mode' : 'light-mode'}`}>
-        <Navigation parentToChild={{mode}} modeChange={handleModeChange}/>
-        <FadeIn transitionDuration={700}>
-            <Main/>
-            <HeroAI onChatOpen={handleChatOpen} />
-            <Expertise/>
-            <Timeline/>
-            <Project/>
-            <Contact/>
-        </FadeIn>
-        <Footer />
-        <ChatBot isOpen={isChatOpen} onClose={handleChatClose} />
-    </div>
-    );
-}
+const App = () => (
+  <QueryClientProvider client={queryClient}>
+    <TooltipProvider>
+      <Toaster />
+      <Sonner />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Index />} />
+          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </TooltipProvider>
+  </QueryClientProvider>
+);
 
 export default App;

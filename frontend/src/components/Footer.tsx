@@ -1,18 +1,17 @@
-import React from "react";
-import GitHubIcon from '@mui/icons-material/GitHub';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import '../assets/styles/Footer.scss'
-
-function Footer() {
+const Footer = () => {
   return (
-    <footer>
-      <div>
-        <a href="https://github.com/sapkota-aayush" target="_blank" rel="noreferrer"><GitHubIcon/></a>
-        <a href="https://www.linkedin.com/in/aayush-sapkota/" target="_blank" rel="noreferrer"><LinkedInIcon/></a>
+    <footer className="bg-accent border-t border-border">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <p className="text-sm lg:text-base text-muted-foreground">
+              © 2025 Aayush Sapkota
+            </p>
+          </div>
+        </div>
       </div>
-      <p>AI powered portfolio by AU</p>
     </footer>
   );
-}
+};
 
 export default Footer;
