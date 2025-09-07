@@ -30,7 +30,7 @@ const ExperienceSection = () => {
   ];
 
   return (
-    <section className="py-12 lg:py-16 bg-background relative">
+    <section className="py-4 lg:py-8 bg-background relative">
       <div className="absolute inset-0 bg-gradient-radial opacity-30"></div>
       
       {/* Simple matching elements */}

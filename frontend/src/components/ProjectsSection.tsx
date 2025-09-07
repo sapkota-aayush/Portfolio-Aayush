@@ -5,6 +5,13 @@ import { ExternalLink, Github } from "lucide-react";
 const ProjectsSection = () => {
   const projects = [
     {
+      title: "AI-Powered Portfolio",
+      description: "Interactive portfolio website with AI chat integration. Features intelligent conversation\nabout my background, projects, and experience using RAG (Retrieval Augmented Generation)\nwith vector embeddings and function calling for contact form automation.",
+      tech: ["React", "TypeScript", "FastAPI", "OpenAI", "LangChain", "Pinecone", "AWS", "SMTP"],
+      github: "https://github.com/sapkota-aayush/Portfolio-Aayush",
+      demo: "#"
+    },
+    {
       title: "Folderly-Prototype",
       description: "Console Python package for AI-powered file organization using natural language.\nUses OpenAI function calling, threading, and OS file management for intelligent\nfile path handling and organization.",
       tech: ["Python", "OpenAI GPT-3", "Poetry", "Threading", "OS File Management"],
@@ -21,7 +28,7 @@ const ProjectsSection = () => {
   ];
 
   return (
-    <section className="py-12 lg:py-16 bg-pattern-grid bg-pattern relative">
+    <section className="py-4 lg:py-8 bg-pattern-grid bg-pattern relative">
       <div className="absolute inset-0 bg-gradient-muted opacity-70"></div>
       
       {/* Fun project-themed elements */}
@@ -45,18 +52,18 @@ const ProjectsSection = () => {
       <div className="px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-4xl ml-8 sm:ml-12 lg:ml-16">
           <div className="border border-border/30 rounded-lg p-6 lg:p-8 bg-background/50 backdrop-blur-sm">
-          <div className="mb-12 lg:mb-16">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-foreground tracking-tight">
+          <div className="mb-2 sm:mb-4 lg:mb-6">
+            <h2 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-display font-bold text-foreground tracking-tight">
               Featured Projects
             </h2>
           </div>
           
-          <div className="space-y-8">
+          <div className="space-y-3 sm:space-y-4">
             {projects.map((project, index) => (
-              <Card key={index} className="p-6 lg:p-8 bg-card border border-border/50 shadow-soft hover:shadow-medium transition-all duration-300 group">
-                <div className="space-y-6">
-                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
-                    <h3 className="text-xl lg:text-2xl font-medium text-foreground group-hover:text-primary transition-colors">
+              <Card key={index} className="p-3 sm:p-4 lg:p-6 bg-card border border-border/50 shadow-soft hover:shadow-medium transition-all duration-300 group">
+                <div className="space-y-2 sm:space-y-3">
+                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+                    <h3 className="text-lg sm:text-xl lg:text-2xl font-medium text-foreground group-hover:text-primary transition-colors">
                       {project.title}
                     </h3>
                     <div className="flex gap-3">

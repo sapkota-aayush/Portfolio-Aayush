@@ -28,7 +28,7 @@ const PortfolioHeader = () => {
         <div className="w-1 h-1 bg-muted/30 rounded-full animate-pulse delay-400"></div>
       </div>
       
-      <div className="px-4 sm:px-6 lg:px-8 py-12 lg:py-16 relative z-10">
+      <div className="px-4 sm:px-6 lg:px-8 py-4 lg:py-8 relative z-10">
         <div className="max-w-6xl ml-8 sm:ml-12 lg:ml-16">
           <div className="border border-border/30 rounded-lg p-6 lg:p-8 bg-background/50 backdrop-blur-sm">
           <div className="space-y-12">

@@ -17,7 +17,7 @@ const OpenSourceSection = () => {
 
 
   return (
-    <section className="py-12 lg:py-16 bg-pattern-grid bg-pattern relative">
+    <section className="py-4 lg:py-8 bg-pattern-grid bg-pattern relative">
       <div className="absolute inset-0 bg-gradient-muted opacity-70"></div>
       <div className="px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-4xl ml-8 sm:ml-12 lg:ml-16">
