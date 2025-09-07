@@ -16,7 +16,7 @@ app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  # Allows all origins
-    allow_credentials=True,
+    allow_credentials=False,  # Must be False when allow_origins=["*"]
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -26,6 +26,10 @@ class ChatRequest(BaseModel):
 
 class ChatResponse(BaseModel):
     message:str
+
+@app.get("/")
+def health_check():
+    return {"status": "ok", "message": "Portfolio AI Backend is running!"}
 
 @app.post("/chat/")
 @limiter.limit("10/day")  # Allow 10 questions per day per IP address
