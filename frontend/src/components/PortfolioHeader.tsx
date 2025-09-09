@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Github, Linkedin, Mail, Download } from "lucide-react";
+import { SOCIAL_LINKS } from "@/lib/constants";
 
 const PortfolioHeader = () => {
   return (
@@ -63,19 +64,19 @@ const PortfolioHeader = () => {
             {/* Action Buttons */}
             <div className="flex flex-wrap items-center gap-3 sm:gap-4">
               <Button variant="outline" size="sm" className="gap-2 hover:bg-accent transition-colors" asChild>
-                <a href="https://github.com/sapkota-aayush" target="_blank" rel="noopener noreferrer">
+                <a href={SOCIAL_LINKS.GITHUB} target="_blank" rel="noopener noreferrer">
                   <Github className="w-4 h-4" />
                   GitHub
                 </a>
               </Button>
               <Button variant="outline" size="sm" className="gap-2 hover:bg-accent transition-colors" asChild>
-                <a href="https://www.linkedin.com/in/aayush-sapkota/" target="_blank" rel="noopener noreferrer">
+                <a href={SOCIAL_LINKS.LINKEDIN} target="_blank" rel="noopener noreferrer">
                   <Linkedin className="w-4 h-4" />
                   LinkedIn
                 </a>
               </Button>
               <Button variant="outline" size="sm" className="gap-2 hover:bg-accent transition-colors" asChild>
-                <a href="mailto:aayush@aayussh.com">
+                <a href={`mailto:${SOCIAL_LINKS.EMAIL}`}>
                   <Mail className="w-4 h-4" />
                   Contact
                 </a>

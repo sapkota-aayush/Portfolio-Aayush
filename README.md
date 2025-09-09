@@ -86,8 +86,34 @@ VITE_API_URL=https://your-backend-url.com
    # Deploy dist folder to your hosting service
    ```
 
+## AI Features
+
+- **Intelligent Q&A**: Answers questions about background, experience, and projects
+- **Unknown Question Handling**: Automatically emails unknown questions for future addition
+- **Contact Automation**: Function calling for automated contact form handling
+- **Context Awareness**: Maintains conversation history for better responses
+
+## Project Structure
+
+```
+Portfolio-Aayush/
+├── frontend/                 # React frontend
+│   ├── src/components/      # UI components
+│   ├── src/pages/          # Page components
+│   ├── src/lib/            # Utilities and constants
+│   └── public/             # Static assets
+├── ai_integration.py        # AI chat backend
+├── pinecone_data.py         # Vector database data
+├── api.py                   # FastAPI endpoints
+└── requirements.txt         # Python dependencies
+```
+
 ## Contact
 
 - **Email**: aayush@aayussh.com
 - **LinkedIn**: [aayush-sapkota](https://www.linkedin.com/in/aayush-sapkota/)
 - **GitHub**: [sapkota-aayush](https://github.com/sapkota-aayush)
+
+---
+
+**Built with ❤️ by Aayush Sapkota**

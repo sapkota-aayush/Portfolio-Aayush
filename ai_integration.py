@@ -26,6 +26,59 @@ chain = ConversationChain(llm=llm, memory=memory)
 # Connect to index
 index = pc.Index("aayush-portfolio")
 
+# Email function for unknown questions
+def send_unknown_question_email(question: str, user_email: str = "", user_name: str = "", client_ip: str = "unknown") -> str:
+    """Send unknown question to Aayush for future addition to database"""
+    try:
+        # Email configuration from environment variables
+        smtp_server = os.getenv("SMTP_SERVER", "smtp.gmail.com")
+        smtp_port = int(os.getenv("SMTP_PORT", "587"))
+        email_user = os.getenv("EMAIL_USER")
+        email_password = os.getenv("EMAIL_PASSWORD")
+        recipient_email = os.getenv("RECIPIENT_EMAIL", email_user)
+        
+        if not email_user or not email_password:
+            return "Email service is not configured. Please contact Aayush directly at his email."
+        
+        # Create message
+        msg = MIMEMultipart()
+        msg['From'] = email_user
+        msg['To'] = recipient_email
+        msg['Subject'] = f"New Unknown Question for Portfolio Database"
+        
+        # Email body
+        body = f"""
+New unknown question received from your portfolio AI chat:
+
+Question: "{question}"
+
+User Info:
+- Name: {user_name or 'Not provided'}
+- Email: {user_email or 'Not provided'}
+- IP Address: {client_ip}
+- Time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+
+This question was not found in your current Pinecone database.
+Please add an appropriate answer to pinecone_data.py for future responses.
+
+---
+This message was sent through your AI portfolio chat system.
+        """
+        
+        msg.attach(MIMEText(body, 'plain'))
+        
+        # Send email
+        server = smtplib.SMTP(smtp_server, smtp_port)
+        server.starttls()
+        server.login(email_user, email_password)
+        text = msg.as_string()
+        server.sendmail(email_user, recipient_email, text)
+        server.quit()
+        
+        return "I don't have that information in my database, but I've sent your question to Aayush so he can add it for next time!"
+    except Exception as e:
+        return f"Sorry, there was an issue processing your question: {str(e)}"
+
 # Email function for function calling
 def send_contact_email(user_email: str, user_message: str, user_name: str = "", client_ip: str = "unknown") -> str:
     """Send contact email to Aayush - called by AI when user wants to contact"""
@@ -99,6 +152,28 @@ functions = [
             },
             "required": ["user_email", "user_message"]
         }
+    },
+    {
+        "name": "send_unknown_question_email",
+        "description": "Send unknown question to Aayush when the question is not in the database",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "question": {
+                    "type": "string",
+                    "description": "The question that was not found in the database"
+                },
+                "user_email": {
+                    "type": "string",
+                    "description": "The user's email address (optional)"
+                },
+                "user_name": {
+                    "type": "string",
+                    "description": "The user's name (optional)"
+                }
+            },
+            "required": ["question"]
+        }
     }
 ]
 
@@ -135,6 +210,14 @@ def generate_response_with_memory(query, search_results, client_ip="unknown"):
     with open("prompt.txt", "r") as f:
         system_prompt = f.read()
     
+    # Check if search results have low relevance (indicates unknown question)
+    low_relevance = False
+    if search_results.matches:
+        # If top match has score below 0.7, consider it low relevance
+        top_score = search_results.matches[0].score
+        if top_score < 0.7:
+            low_relevance = True
+    
     # Prepare context from search results
     context = ""
     for match in search_results.matches:
@@ -147,6 +230,13 @@ IMPORTANT: If the user wants to contact Aayush, hire him, work with him, or send
 1. Ask for their email address and message
 2. Use the send_contact_email function to send the email
 3. Confirm that the email was sent
+
+CRITICAL: If you cannot find relevant information in the provided context to answer the user's question, you MUST:
+1. Use the send_unknown_question_email function to send the question to Aayush
+2. The function will automatically respond to the user that you don't have that information but have sent it to Aayush for future addition
+3. DO NOT respond with "I don't have that information" - always use the function instead
+
+RELEVANCE CHECK: Top search result score is {search_results.matches[0].score if search_results.matches else 'N/A'}. {'This appears to be an unknown question - use send_unknown_question_email function.' if low_relevance else 'Search results seem relevant.'}
 
 Context from database: {context}"""
     
@@ -178,6 +268,37 @@ Context from database: {context}"""
                 email_result = send_contact_email(
                     user_email=function_args["user_email"],
                     user_message=function_args["user_message"],
+                    user_name=function_args.get("user_name", ""),
+                    client_ip=client_ip
+                )
+                
+                # Get final response from AI
+                messages.append({
+                    "role": "assistant", 
+                    "content": message.content,
+                    "function_call": message.function_call
+                })
+                messages.append({
+                    "role": "function",
+                    "name": function_name,
+                    "content": email_result
+                })
+                
+                final_response = openai_client.chat.completions.create(
+                    model="gpt-4",
+                    messages=messages
+                )
+                
+                return final_response.choices[0].message.content
+                
+            elif function_name == "send_unknown_question_email":
+                # Parse function arguments
+                function_args = json.loads(message.function_call.arguments)
+                
+                # Call the unknown question email function
+                email_result = send_unknown_question_email(
+                    question=function_args["question"],
+                    user_email=function_args.get("user_email", ""),
                     user_name=function_args.get("user_name", ""),
                     client_ip=client_ip
                 )

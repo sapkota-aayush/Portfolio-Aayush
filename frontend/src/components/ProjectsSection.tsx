@@ -1,6 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ExternalLink, Github } from "lucide-react";
+import { PROJECT_LINKS, SOCIAL_LINKS } from "@/lib/constants";
 
 const ProjectsSection = () => {
   const projects = [
@@ -8,21 +9,21 @@ const ProjectsSection = () => {
       title: "AI-Powered Portfolio",
       description: "Interactive portfolio website with AI chat integration. Features intelligent conversation\nabout my background, projects, and experience using RAG (Retrieval Augmented Generation)\nwith vector embeddings and function calling for contact form automation.",
       tech: ["React", "TypeScript", "FastAPI", "OpenAI", "LangChain", "Pinecone", "AWS", "SMTP"],
-      github: "https://github.com/sapkota-aayush/Portfolio-Aayush",
+      github: PROJECT_LINKS.PORTFOLIO,
       demo: "#"
     },
     {
       title: "Folderly-Prototype",
       description: "Console Python package for AI-powered file organization using natural language.\nUses OpenAI function calling, threading, and OS file management for intelligent\nfile path handling and organization.",
       tech: ["Python", "OpenAI GPT-3", "Poetry", "Threading", "OS File Management"],
-      github: "https://github.com/sapkota-aayush/Folderly-Prototype",
+      github: PROJECT_LINKS.FOLDERLY,
       demo: "#"
     },
     {
       title: "JobTrackerMaster",
       description: "Web-based job application tracking system that tracks job applications and their\nstages. Built with modern web technologies for efficient job search management.",
       tech: ["Django", "DRF", "JWT", "OAuth2.0", "Celery", "Throttling"],
-      github: "https://github.com/sapkota-aayush",
+      github: SOCIAL_LINKS.GITHUB,
       demo: "#"
     }
   ];

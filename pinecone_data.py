@@ -52,5 +52,21 @@ records = [
     { "_id": "profiles_1", "chunk_text": "GitHub: https://github.com/sapkota-aayush, LinkedIn: https://www.linkedin.com/in/aayush-sapkota/, Medium/Blog: https://medium.com/@aayushsapkota1030", "category": "profiles" },
     
     # Leadership and Volunteering
-    { "_id": "leadership_1", "chunk_text": "Toastmasters International - VP of Membership & Speaker (Oct 2024 – Jul 2025), President (Jul 2025 – Present). Managed people, budgets, marketing, events; developed leadership and public speaking skills.", "category": "leadership" }
+    { "_id": "leadership_1", "chunk_text": "Toastmasters International - VP of Membership & Speaker (Oct 2024 – Jul 2025), President (Jul 2025 – Present). Managed people, budgets, marketing, events; developed leadership and public speaking skills.", "category": "leadership" },
+    
+    # Problem Solving & Technical Challenges
+    { "_id": "problem_1", "chunk_text": "Folderly Project Challenge: File operations were blocking the UI. Problem: I/O bound operations froze the interface during file management. Solution: Implemented async + threading architecture with event loop, individual threads for each operation, and parallel execution. Result: 13 seconds reduced to 2 seconds for multiple operations.", "category": "problem_solving" },
+    { "_id": "problem_2", "chunk_text": "Python Async Challenge: Converting synchronous file operations to async. Used asyncio.to_thread() for non-blocking I/O operations and asyncio.gather() for parallel execution. This kept the UI responsive while handling multiple file operations simultaneously.", "category": "problem_solving" },
+    { "_id": "problem_3", "chunk_text": "Function Calling Integration: Integrated OpenAI function calling with async operations in Folderly. Challenge was managing AI-generated function calls with thread-safe execution. Solved by creating a task queue system that processes AI commands through the async architecture.", "category": "problem_solving" },
+    
+        
+    # Common Technical Questions
+    { "_id": "qa_1", "chunk_text": "What's your biggest technical challenge? Building Folderly's async architecture. File operations were blocking the UI, so I implemented threading with asyncio to make operations parallel and non-blocking, reducing execution time from 13 to 2 seconds.", "category": "qa" },
+    { "_id": "qa_2", "chunk_text": "How do you approach debugging? I use systematic debugging - reproduce the issue, isolate the problem, add logging/print statements, test hypotheses, and fix incrementally. For complex issues, I create minimal test cases.", "category": "qa" },
+    { "_id": "qa_3", "chunk_text": "What's your strongest programming language? Python is my primary language. I love its readability, extensive libraries, and how it handles complex data structures. I use it for AI integration, backend development, and automation tasks.", "category": "qa" },
+    { "_id": "qa_4", "chunk_text": "How do you learn new technologies? I start with official documentation, build small projects, join communities, and practice regularly. For AI/ML, I attended workshops like Build With AI and joined The AI Collective Kingston chapter.", "category": "qa" },
+    { "_id": "qa_5", "chunk_text": "What's your development process? I follow: 1) Understand requirements, 2) Plan architecture, 3) Build incrementally, 4) Test frequently, 5) Document as I go. I use version control, write clean code, and prioritize user experience.", "category": "qa" },
+    { "_id": "qa_6", "chunk_text": "How do you handle errors in your code? I implement comprehensive error handling with try-catch blocks, logging, graceful degradation, and user-friendly error messages. For Folderly, I added rollback mechanisms for failed operations.", "category": "qa" },
+    { "_id": "qa_7", "chunk_text": "What's your experience with AI integration? I've integrated OpenAI GPT-4 with function calling in Folderly, used LangChain for RAG pipelines, and worked with vector embeddings. I understand prompt engineering and AI model limitations.", "category": "qa" },
+    { "_id": "qa_8", "chunk_text": "How do you stay updated with technology? I attend tech events, follow industry blogs, contribute to open source, and practice with new tools. Recent activities include Build With AI workshop and Intuit Open Source Event.", "category": "qa" }
 ]

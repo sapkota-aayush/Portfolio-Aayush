@@ -1,6 +1,8 @@
 // API integration for connecting frontend to AI backend
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000'; // FastAPI backend URL
+import { API_CONFIG } from './constants';
+
+const API_BASE_URL = API_CONFIG.BASE_URL;
 
 export interface ChatRequest {
   message: string;

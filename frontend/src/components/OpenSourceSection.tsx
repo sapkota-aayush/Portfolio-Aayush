@@ -2,6 +2,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ExternalLink, Github, Star } from "lucide-react";
+import { PROJECT_LINKS } from "@/lib/constants";
 
 const OpenSourceSection = () => {
   const contributions = [
@@ -10,7 +11,7 @@ const OpenSourceSection = () => {
       description: "Open source contribution to Numaflow project. Key contributions include:\n• Docker file optimization\n• gRPC server error handling\n• Documentation bug fixes\n• Python SDK improvements",
       tech: ["Python SDK", "Go", "Rust", "Kubernetes", "Docker"],
       impact: "",
-      github: "https://github.com/sapkota-aayush/numaflow",
+      github: PROJECT_LINKS.NUMAFLOW,
       type: "Open Source"
     }
   ];
