@@ -51,8 +51,8 @@ const ProjectsSection = () => {
         </div>
       </div>
       <div className="px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="max-w-4xl ml-8 sm:ml-12 lg:ml-16">
-          <div className="border border-border/30 rounded-lg p-6 lg:p-8 bg-background/50 backdrop-blur-sm">
+        <div className="max-w-4xl mx-auto sm:ml-8 lg:ml-16">
+          <div className="border border-border/30 rounded-lg p-4 sm:p-6 lg:p-8 bg-background/50 backdrop-blur-sm">
           <div className="mb-2 sm:mb-4 lg:mb-6">
             <h2 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-display font-bold text-foreground tracking-tight">
               Featured Projects
@@ -64,10 +64,10 @@ const ProjectsSection = () => {
               <Card key={index} className="p-3 sm:p-4 lg:p-6 bg-card border border-border/50 shadow-soft hover:shadow-medium transition-all duration-300 group">
                 <div className="space-y-2 sm:space-y-3">
                   <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
-                    <h3 className="text-lg sm:text-xl lg:text-2xl font-medium text-foreground group-hover:text-primary transition-colors">
+                    <h3 className="text-base sm:text-lg lg:text-2xl font-medium text-foreground group-hover:text-primary transition-colors">
                       {project.title}
                     </h3>
-                    <div className="flex gap-3">
+                    <div className="flex gap-2 sm:gap-3 flex-wrap">
                       <Button variant="outline" size="sm" className="gap-2 hover:bg-accent transition-colors" asChild>
                         <a href={project.github} target="_blank" rel="noopener noreferrer">
                           <Github className="w-4 h-4" />
@@ -81,15 +81,15 @@ const ProjectsSection = () => {
                     </div>
                   </div>
                   
-                  <p className="text-base lg:text-lg text-muted-foreground leading-relaxed whitespace-pre-line">
+                  <p className="text-sm sm:text-base lg:text-lg text-muted-foreground leading-relaxed whitespace-pre-line">
                     {project.description}
                   </p>
                   
-                  <div className="flex flex-wrap gap-3">
+                  <div className="flex flex-wrap gap-2 sm:gap-3">
                     {project.tech.map((tech, techIndex) => (
                       <span
                         key={techIndex}
-                        className="px-4 py-2 bg-secondary text-secondary-foreground text-sm lg:text-base rounded-full border border-border hover:bg-primary hover:text-primary-foreground transition-all duration-200 cursor-default"
+                        className="px-2 sm:px-3 lg:px-4 py-1 sm:py-2 bg-secondary text-secondary-foreground text-xs sm:text-sm lg:text-base rounded-full border border-border hover:bg-primary hover:text-primary-foreground transition-all duration-200 cursor-default"
                       >
                         {tech}
                       </span>

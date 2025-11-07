@@ -29,15 +29,15 @@ const PortfolioHeader = () => {
         <div className="w-1 h-1 bg-muted/30 rounded-full animate-pulse delay-400"></div>
       </div>
       
-      <div className="px-4 sm:px-6 lg:px-8 py-4 lg:py-8 relative z-10">
-        <div className="max-w-6xl ml-8 sm:ml-12 lg:ml-16">
-          <div className="border border-border/30 rounded-lg p-6 lg:p-8 bg-background/50 backdrop-blur-sm">
+      <div className="px-4 sm:px-6 lg:px-8 py-4 lg:py-8 relative z-10 overflow-hidden">
+        <div className="max-w-6xl mx-auto sm:ml-8 lg:ml-16">
+          <div className="border border-border/30 rounded-lg p-4 sm:p-6 lg:p-8 bg-background/50 backdrop-blur-sm">
           <div className="space-y-12">
             {/* Name, Photo, and Description all aligned */}
             <div className="flex flex-col lg:flex-row items-start lg:items-center gap-6 lg:gap-8">
               {/* Photo Section */}
-              <div className="relative flex-shrink-0">
-                <div className="w-32 h-32 lg:w-40 lg:h-40 rounded-full border-2 border-border overflow-hidden">
+              <div className="relative flex-shrink-0 mx-auto lg:mx-0">
+                <div className="w-24 h-24 sm:w-32 sm:h-32 lg:w-40 lg:h-40 rounded-full border-2 border-border overflow-hidden">
                   <img 
                     src="/IMG_0267.jpg" 
                     alt="Aayush Sapkota" 
@@ -48,21 +48,21 @@ const PortfolioHeader = () => {
               </div>
               
               {/* Name and Title */}
-              <div className="space-y-2 flex-1">
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-foreground tracking-tight leading-tight">
+              <div className="space-y-2 flex-1 text-center lg:text-left">
+                <h1 className="text-2xl sm:text-4xl lg:text-6xl font-display font-bold text-foreground tracking-tight leading-tight">
                   Aayush Sapkota
                 </h1>
-                <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground font-light">
+                <p className="text-base sm:text-lg lg:text-2xl text-muted-foreground font-light">
                   Backend Developer
                 </p>
-                <p className="text-base sm:text-lg text-foreground/80 leading-relaxed max-w-2xl">
+                <p className="text-sm sm:text-base lg:text-lg text-foreground/80 leading-relaxed max-w-2xl">
                   Canada • Kingston • St. Lawrence College
                 </p>
               </div>
             </div>
 
             {/* Action Buttons */}
-            <div className="flex flex-wrap items-center gap-3 sm:gap-4">
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2 sm:gap-3 lg:gap-4">
               <Button variant="outline" size="sm" className="gap-2 hover:bg-accent transition-colors" asChild>
                 <a href={SOCIAL_LINKS.GITHUB} target="_blank" rel="noopener noreferrer">
                   <Github className="w-4 h-4" />
