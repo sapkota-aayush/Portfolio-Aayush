@@ -1,0 +1,50 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches: [ master ]
+  workflow_dispatch:  # Allows manual trigger
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup SSH
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/deploy_key.pem
+        chmod 600 ~/.ssh/deploy_key.pem
+        ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
+
+    - name: Deploy to EC2
+      run: |
+        ssh -i ~/.ssh/deploy_key.pem -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << EOF
+          set -e
+          cd ${{ secrets.EC2_DEPLOY_PATH }}
+          
+          echo "🚀 Starting deployment..."
+          
+          echo "📥 Pulling latest code..."
+          git pull origin master
+          
+          echo "🔄 Restarting backend screen session..."
+          screen -S backend -X quit || true
+          screen -dmS backend bash -c "cd ${{ secrets.EC2_DEPLOY_PATH }} && source venv/bin/activate 2>/dev/null || true && uvicorn api:app --host 0.0.0.0 --port 8000"
+          
+          echo "🔄 Restarting frontend screen session..."
+          screen -S frontend -X quit || true
+          screen -dmS frontend bash -c "cd ${{ secrets.EC2_DEPLOY_PATH }}/frontend && npm run dev"
+          
+          echo "✅ Deployment completed!"
+          echo "📊 Screen sessions:"
+          screen -ls
+        EOF
+
+    - name: Deployment Status
+      run: |
+        echo "✅ Deployment workflow completed successfully!"
+
