@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 const ExperienceSection = () => {
   const experiences = [
     {
-      title: "Software Engineer Intern (Co-op)",
+      title: "Software Development Intern (Co-op)",
       company: "Empire Life",
       location: "Kingston, ON (Hybrid)",
       period: "Aug 2025 – Present",
