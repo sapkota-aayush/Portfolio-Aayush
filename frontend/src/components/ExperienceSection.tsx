@@ -8,9 +8,11 @@ const ExperienceSection = () => {
       company: "Empire Life",
       location: "Kingston, ON (Hybrid)",
       period: "Aug 2025 – Present",
-      description: "Developing features for existing and new applications based on User Stories.\nWorking with APIs, microservices, and modern development tools through the full\nsoftware development cycle from feature request to production deployment.",
-      type: "Internship"
-    },
+      description: `Modernized legacy Pentaho ETL workflows for annual tax slip generation (T4, T3, etc.) by converting them into containerized Spring Boot microservices on Docker, enhancing automation, portability, and scalability.
+      Automated job execution using container orchestration, reducing manual effort, execution time, and risk of errors.
+      Migrated data pipelines and storage to GCP (Cloud Storage, Cloud SQL, Pub/Sub) to enable cloud-native ETL processing.`,
+          type: "Internship"
+          },
     {
       title: "Peer Tutor",
       company: "Self-Employed",
